@@ -2,6 +2,8 @@ const app = require('../lib/app');
 const request = require('supertest');
 const Profile = require('../lib/models/Profile');
 
+jest.mock('../lib/services/futuramaAPI.js');
+
 describe('profile routes', () => {
   afterAll(() => {
     return Profile.drop();
@@ -16,7 +18,7 @@ describe('profile routes', () => {
           name: 'Anna',
           favoriteCharacter: 'Bender',
           _id: expect.any(String),
-          tagline: expect.any(String)
+          tagline: 'sup'
         });
       });
   });
