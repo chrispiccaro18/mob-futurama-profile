@@ -75,7 +75,7 @@ describe('profile routes', () => {
       .send({ name: 'name', favoriteCharacter: 'Bender' })
       .then(createdProfile => {
         return request(app)
-          .delete(`/profile/${createdProfile.body._id}`)
+          .delete(`/profile/${createdProfile.body._id}`);
       })
       .then(result => {
         expect(result.body).toEqual({
