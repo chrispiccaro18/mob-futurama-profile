@@ -22,4 +22,12 @@ describe('profile routes', () => {
         });
       });
   });
+
+  it('gets a list of profiles', () => {
+    return request(app)
+      .get('/profile')
+      .then(res => {
+        expect(res.body).toHaveLength(1);
+      });
+  });
 });
