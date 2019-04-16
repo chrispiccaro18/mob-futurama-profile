@@ -49,4 +49,23 @@ describe('profile routes', () => {
       });
 
   });
+
+  it.only('patches an existing profile', () => {
+    return request(app)
+      .post('/profile')
+      .send({ name: 'name', favoriteCharacter: 'Bender' })
+      .then(createdProfile => {
+        return request(app)
+          .patch(`/profile/${createdProfile.body._id}`)
+          .send({ favoriteCharacter: 'Fry' });
+      })
+      .then(result => {
+        expect(result.body).toEqual({
+          name: 'name',
+          favoriteCharacter: 'Fry',
+          _id: expect.any(String),
+          tagline: 'supp'
+        });
+      });
+  });
 });
