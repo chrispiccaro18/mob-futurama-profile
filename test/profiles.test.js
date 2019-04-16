@@ -30,4 +30,23 @@ describe('profile routes', () => {
         expect(res.body).toHaveLength(1);
       });
   });
+
+  it('returns profile by id', () => {
+    return request(app)
+      .post('/profile')
+      .send({ name: 'name', favoriteCharacter: 'Bender' })
+      .then(createdProfile => {
+        return request(app)
+          .get(`/profile/${createdProfile.body._id}`);
+      })
+      .then(result => {
+        expect(result.body).toEqual({
+          name: 'name',
+          favoriteCharacter: 'Bender',
+          _id: expect.any(String),
+          tagline: 'sup'
+        });
+      });
+
+  });
 });
